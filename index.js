@@ -3,6 +3,8 @@
 
   Keep in mind that your functions must still have and use a parameter for accepting all movies.
 */
+const { TestWatcher } = require("@jest/core");
+const movies = require("./movies");
 const exampleMovies = require("./movies");
 // Do not change the line above.
 
@@ -57,8 +59,22 @@ function getAllMovieTitles(movies) {
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating() {}
+function checkIfAnyMovieHasRating(movies, rated = "G") {
+    // should use the `.some()` method (2 ms)
+    // ✕ should throw an error if there are no movies
+    // ✕ should return `true` if any movie in the list has the given rating (1 ms)
+    // ✕ should return `false` if any movie in the list has the given rating (1 ms)
+    // ✕ should dynamically change depending on the movies inputted
+    // ✕ if no rating is passed, the default should be 'G' (1 ms)
+    if(movies.length === 0) {
+      throw "There are no movies listed.";
+    }
 
+    let goodRating = movies.some((movie) =>{ return movie.rated === rated }
+    );
+    return goodRating;
+  }
+  
 /**
  * findById()
  * -----------------------------
@@ -75,8 +91,17 @@ function checkIfAnyMovieHasRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  if(!movies.length)    
+    throw "Error. No movies found!";
+  // let findingNemo = movies.find(movie =>{
+  //   return findingNemo.imdbID === id 
+  // })
+  //   return findingNemo === 0 ? null : findingNemo;
 
+  let findingNemo = movies.find((movie) => movie.imdbID === id);
+  return !findingNemo ? null : findingNemo;
+}
 /**
  * filterByGenre()
  * -----------------------------
@@ -125,7 +150,14 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  if(!movies.length)
+    throw "Error. I told you there are no movies available!";
+    return movies.filter(movie => 
+      movie.released 
+      .slice(-5) 
+      <= year);
+}
 
 /**
  * getRottenTomatoesScoreByMovie()
