@@ -124,7 +124,16 @@ function findById(movies, id) {
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+  // try toLowerCase
+  // loop, dont forget throw
+  if(!movies.length) {
+    throw "For the millionth time, there are no movies listed!."
+  };
+  return movies.filter((movie) => movie.genre
+    .toLowerCase().includes
+    (genre.toLowerCase()));
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -151,6 +160,7 @@ function filterByGenre() {}
     ];
  */
 function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  // need additonal method to filter start and end ugh.
   if(!movies.length)
     throw "Error. I told you there are no movies available!";
     return movies.filter(movie => 
